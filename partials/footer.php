@@ -9,7 +9,7 @@ if ( (is_administrator() && (basename($_SERVER['PHP_SELF']) != 'logout.php'))
 	<a href="logout.php">Đăng xuất</a></p>';
 
 } else {
-	echo '<hr><p><a href="/">Trang chủ</a> <-> <a href="login.php">Đăng nhập</a></p>'; 
+	echo '<hr><p class="text-center mt-5"><a class="btn btn-primary" href="/">Trang chủ</a> - <a class="btn btn-primary" href="register.php">Đăng ký</a> - <a class="btn btn-primary" href="login.php">Đăng nhập</a></p>'; 
 }
 
 ?>

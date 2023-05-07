@@ -21,19 +21,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 }
 
-if ($error_message) {
-	include '../partials/show_error.php';
-}
-
 if ($loggedin) {
 	echo '<p>Bạn đã đăng nhập!</p>';
 } else {
-	echo '<h2>Login Form</h2>
+	echo '<h1 class="text-center py-3">Đăng nhập</h1>
 	<form action="login.php" method="post">
-	<p><label>Địa chỉ Email <input type="email" name="email"></label></p>
-	<p><label>Mật khẩu <input type="password" name="password"></label></p>
-	<p><input type="submit" name="submit" value="Đăng nhập!"></p>
+		<div class="mb-3">
+			<label for="exampleInputEmail1" class="form-label">Địa chỉ Email</label>
+			<input required type="email" name="email" class="form-control" id="exampleInputEmail1">
+		</div>
+		<div class="mb-3">
+			<label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
+			<input required type="password" name="password" class="form-control" id="exampleInputPassword1">
+		</div>
+		<div class="d-flex flex-wrap align-items-center justify-content-between">
+			<button type="submit" name="submit" class="btn btn-primary">Đăng nhập!</button>
+			<div>
+				Bạn đã là thành viên chưa ? <a href="register.php">Đăng ký</a>
+			</div>
+		</div>
 	</form>';
+}
+
+if ($error_message) {
+	include '../partials/show_error.php';
 }
 
 include '../partials/footer.php';
