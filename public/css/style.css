@@ -15,8 +15,8 @@ q:before,q:after,blockquote:before,blockquote:after{ content:""; }
 body{ background:#fefefe;  color:#AAA;  }
 
 /* --------- Links --------- */
-a:link,a:visited{ text-decoration:none; color:#666; border-bottom:1px #999 dashed; }
-a:hover,a:active{ color:#333; border-bottom:1px #333 solid; }
+a:link,a:visited{ text-decoration:none; border-bottom:1px #999 dashed; }
+a:hover,a:active{ border-bottom:1px #333 solid; }
 
 /* --------- Layout --------- */
 #container{ margin:20px auto 30px; width:65%; }
@@ -48,4 +48,8 @@ p { margin-top: 1em; }
 
 .error {
 	color: red;
+}
+
+.btn{
+   color: white;
 }
