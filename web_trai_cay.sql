@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 07, 2023 lúc 05:48 AM
+-- Thời gian đã tạo: Th6 25, 2023 lúc 08:04 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `traicay`
+-- Cơ sở dữ liệu: `web_trai_cay`
 --
 
 -- --------------------------------------------------------
@@ -73,8 +73,18 @@ DROP TABLE IF EXISTS `loai_san_pham`;
 CREATE TABLE `loai_san_pham` (
   `id` int(11) NOT NULL,
   `ten` varchar(255) NOT NULL,
-  `hinh_anh` text NOT NULL
+  `hinh_anh` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `loai_san_pham`
+--
+
+INSERT INTO `loai_san_pham` (`id`, `ten`, `hinh_anh`) VALUES
+(1, 'Trái Cây', NULL),
+(2, 'Rau Củ', NULL),
+(4, 'Nước Ngọt', NULL),
+(5, 'Đồ Hộp', NULL);
 
 -- --------------------------------------------------------
 
@@ -90,9 +100,17 @@ CREATE TABLE `nguoi_dung` (
   `dia_chi` varchar(255) NOT NULL,
   `mat_khau` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `role` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL DEFAULT 'user',
   `hinh_dai_dien` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `nguoi_dung`
+--
+
+INSERT INTO `nguoi_dung` (`id`, `ten_nguoi_dung`, `sdt_nguoi_dung`, `dia_chi`, `mat_khau`, `email`, `role`, `hinh_dai_dien`) VALUES
+(1, 'admin', '0987654321', 'admin', '123456', 'admin@gmail.com', 'admin', ''),
+(2, 'sanza1610', '098754321', '160 levantho', '123456', 'sanza1610@gmail.com', 'user', '');
 
 -- --------------------------------------------------------
 
@@ -106,6 +124,17 @@ CREATE TABLE `nguon_goc` (
   `xuat_xu` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `nguon_goc`
+--
+
+INSERT INTO `nguon_goc` (`id`, `xuat_xu`) VALUES
+(1, 'Anh'),
+(2, 'Pháp'),
+(3, 'Đức'),
+(4, 'Mỹ'),
+(5, 'Trung Quốc');
+
 -- --------------------------------------------------------
 
 --
@@ -116,13 +145,23 @@ DROP TABLE IF EXISTS `san_pham`;
 CREATE TABLE `san_pham` (
   `id` int(11) NOT NULL,
   `ten_san_pham` varchar(255) NOT NULL,
-  `can_nang` int(11) NOT NULL,
+  `can_nang` varchar(255) NOT NULL,
   `gia_tien` int(11) NOT NULL DEFAULT 0,
   `id_nguon_goc` int(11) NOT NULL,
   `id_loai_san_pham` int(11) NOT NULL,
   `hinh_anh` text NOT NULL,
-  `gia_khuyen_mai` int(11) NOT NULL DEFAULT 0
+  `gia_khuyen_mai` int(11) NOT NULL DEFAULT 0,
+  `noi_dung` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `san_pham`
+--
+
+INSERT INTO `san_pham` (`id`, `ten_san_pham`, `can_nang`, `gia_tien`, `id_nguon_goc`, `id_loai_san_pham`, `hinh_anh`, `gia_khuyen_mai`, `noi_dung`) VALUES
+(5, 'Cam', '15kg', 500000, 2, 1, 'https://dacsancamvinh.net/wp-content/uploads/2015/06/cong-dung-qua-cam.jpg', 0, 'Mô Tả Cam'),
+(6, 'Táo', '12kg', 100000, 4, 1, 'https://newfreshfoods.com.vn//datafiles/3/2018-02-27/thumb_16100958642348_tao-do-my-red-delicious-size-36-44.jpg', 0, 'Mô Tả Táo'),
+(8, 'Coca Cola', '10kg', 100000, 5, 4, 'https://product.hstatic.net/200000356473/product/cocacola-chai-390ml_7214ffae946e4e63826e8f38a45ed5fa_grande.jpg', 0, 'Chi tiet Coca Cola');
 
 -- --------------------------------------------------------
 
@@ -135,6 +174,16 @@ CREATE TABLE `trang_thai` (
   `id` int(11) NOT NULL,
   `ten_trang_thai` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `trang_thai`
+--
+
+INSERT INTO `trang_thai` (`id`, `ten_trang_thai`) VALUES
+(2, 'Thất Bại'),
+(3, 'Đang Xử Lý'),
+(4, 'Đã Nhận'),
+(5, 'Thành Công');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -208,31 +257,31 @@ ALTER TABLE `don_hang`
 -- AUTO_INCREMENT cho bảng `loai_san_pham`
 --
 ALTER TABLE `loai_san_pham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `nguoi_dung`
 --
 ALTER TABLE `nguoi_dung`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `nguon_goc`
 --
 ALTER TABLE `nguon_goc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`
 --
 ALTER TABLE `san_pham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `trang_thai`
 --
 ALTER TABLE `trang_thai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
