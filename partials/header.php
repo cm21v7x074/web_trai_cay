@@ -21,4 +21,32 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 </head>
 <body>
 	<div class="container" id="container">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="index.php"></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="index.php">Trang chủ</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="sanpham.php">Sản phẩm</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="tintuc.php">Tin tức</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="lienhe.php">Liên hệ</a>
+					</li>
+				</ul>
+				<form class="d-flex hd-search">
+					<input class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
+					<button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
+				</form>
+			</div>
+		</div>
+	</nav>
  		<!-- BEGIN CHANGEABLE CONTENT. -->

@@ -21,9 +21,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 }
 
-if ($loggedin) {
-	echo '<p>Bạn đã đăng nhập!</p>';
-} else {
+if ( (is_administrator() && (basename($_SERVER['PHP_SELF']) != 'logout.php'))
+		|| ! (empty($loggedin)) ) { ?>
+<div class="my-3 text-center">
+	<p>Bạn đã đăng nhập!</p>
+	<div>
+		<a class="btn btn-primary" href="index.php">Trang chủ</a>
+		<a class="btn btn-success" href="admin/index.php">Quản lý</a>
+	</div>
+</div>
+<?php } else {
 	echo '<h1 class="text-center py-3">Đăng nhập</h1>
 	<form action="login.php" method="post">
 		<div class="mb-3">
