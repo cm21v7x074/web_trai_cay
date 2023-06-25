@@ -1,5 +1,4 @@
 <?php
-
 if (session_status() === PHP_SESSION_NONE) {
 	session_start();
 }
@@ -21,7 +20,7 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 </head>
 <body>
 	<div class="container" id="container">
-<?php if ( (is_administrator() && (basename($_SERVER['PHP_SELF']) != 'logout.php')) || ! (empty($loggedin)) ) { ?>
+<?php if ( !(empty($_SESSION['user'])) && $_SESSION['role'] == 'admin' ) { ?>
 	<div class="my-3">
 		<h2>Quản lý</h2>
 	</div>
@@ -52,8 +51,8 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 							Sản phẩm
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="../san_pham/index.php">Danh sách</a></li>
-							<li><a class="dropdown-item" href="../san_pham/them.php">Thêm mới</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/san_pham/index.php">Danh sách</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/san_pham/them.php">Thêm mới</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -61,8 +60,8 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 							Loại sản phẩm
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="../loai_san_pham/index.php">Danh sách</a></li>
-							<li><a class="dropdown-item" href="../loai_san_pham/them.php">Thêm mới</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/loai_san_pham/index.php">Danh sách</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/loai_san_pham/them.php">Thêm mới</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -70,8 +69,8 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 							Nguồn gốc
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="../nguon_goc/index.php">Danh sách</a></li>
-							<li><a class="dropdown-item" href="../nguon_goc/them.php">Thêm mới</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/nguon_goc/index.php">Danh sách</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/nguon_goc/them.php">Thêm mới</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -79,8 +78,8 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 							Trạng thái
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="../trang_thai/index.php">Danh sách</a></li>
-							<li><a class="dropdown-item" href="../trang_thai/them.php">Thêm mới</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/trang_thai/index.php">Danh sách</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/trang_thai/them.php">Thêm mới</a></li>
 						</ul>
 					</li>
 				</ul>

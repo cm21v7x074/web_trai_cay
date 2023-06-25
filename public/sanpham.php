@@ -3,88 +3,28 @@ include '../partials/header.php';
 
 include '../partials/db_connect.php';
 
-// if (isset($_GET['random'])) {
-// 	$query = 'SELECT id, quote, source, favorite FROM quotes ORDER BY RAND() DESC LIMIT 1';
-// } elseif (isset($_GET['favorite'])) {
-// 	$query = 'SELECT id, quote, source, favorite FROM quotes WHERE favorite=1 ORDER BY RAND() DESC LIMIT 1';
-// } else {
-// 	$query = 'SELECT id, quote, source, favorite FROM quotes ORDER BY date_entered DESC LIMIT 1';
-// }
-
-// try {
-// 	$sth = $pdo->query($query);
-// 	$row = $sth->fetch();
-// } catch (PDOException $e) {
-// 	$pdo_error = $e->getMessage();
-// }
+$loai_san_pham = 'SELECT * FROM loai_san_pham ORDER BY id ASC';
 ?>
 
-<div class="my-2">
-	<h2>Lê</h2>
-	<div class="row">
-		<div class="col-6 col-md-3">
-			<a class="link-success" href="chitietsp.php">
-				<img class="img-fluid" src="https://cdn.tgdd.vn/Products/Images/8788/223091/bhx/le-duong-tui-1kg-4-6-trai-202211040848115718.jpg" alt="">
-				<h3>Lê đường 1kg (4-6 trái)</h3>
-				<p>Lê đường là trái cây có xuất xứ từ những vùng có khí hậu lạnh. Lê đường được nhập khẩu từ Trung Quốc với đầy đủ các tiêu chuẩn chất lượng.</p>
-			</a>
-		</div>
-		<div class="col-6 col-md-3">
-			<a class="link-success" href="chitietsp.php">
-				<img class="img-fluid" src="https://cdn.tgdd.vn/Products/Images/8788/223091/bhx/le-duong-tui-1kg-4-6-trai-202211040848115718.jpg" alt="">
-				<h3>Lê đường 1kg (4-6 trái)</h3>
-				<p>Lê đường là trái cây có xuất xứ từ những vùng có khí hậu lạnh. Lê đường được nhập khẩu từ Trung Quốc với đầy đủ các tiêu chuẩn chất lượng.</p>
-			</a>
-		</div>
-		<div class="col-6 col-md-3">
-			<a class="link-success" href="chitietsp.php">
-				<img class="img-fluid" src="https://cdn.tgdd.vn/Products/Images/8788/223091/bhx/le-duong-tui-1kg-4-6-trai-202211040848115718.jpg" alt="">
-				<h3>Lê đường 1kg (4-6 trái)</h3>
-				<p>Lê đường là trái cây có xuất xứ từ những vùng có khí hậu lạnh. Lê đường được nhập khẩu từ Trung Quốc với đầy đủ các tiêu chuẩn chất lượng.</p>
-			</a>
-		</div>
-		<div class="col-6 col-md-3">
-			<a class="link-success" href="chitietsp.php">
-				<img class="img-fluid" src="https://cdn.tgdd.vn/Products/Images/8788/223091/bhx/le-duong-tui-1kg-4-6-trai-202211040848115718.jpg" alt="">
-				<h3>Lê đường 1kg (4-6 trái)</h3>
-				<p>Lê đường là trái cây có xuất xứ từ những vùng có khí hậu lạnh. Lê đường được nhập khẩu từ Trung Quốc với đầy đủ các tiêu chuẩn chất lượng.</p>
-			</a>
+<?php 
+	foreach ($pdo->query($loai_san_pham) as $data) {
+		$sanpham = 'SELECT * FROM san_pham WHERE id_loai_san_pham='. $data['id'] .' ORDER BY id ASC';
+?>
+	<div class="my-2">
+		<h2 class="py-2"><?php echo $data['ten']; ?></h2>
+		<div class="row">
+			<?php foreach ($pdo->query($sanpham) as $row) { ?>
+				<div class="col-6 col-md-3">
+					<a class="link-success" href="chitietsp.php?id=<?php echo $row['id']; ?>">
+						<img class="img-fluid" src="<?php echo $row['hinh_anh']; ?>" alt="">
+						<h3 class="my-2"><?php echo $row['ten_san_pham']; ?></h3>
+						<p><?php echo $row['gia_tien']; ?></p>
+					</a>
+				</div>
+			<?php } ?>
 		</div>
 	</div>
-</div>
-<div class="my-2">
-	<h2>Táo</h2>
-	<div class="row">
-		<div class="col-6 col-md-3">
-			<a class="link-success" href="chitietsp.php">
-				<img class="img-fluid" src="https://cdn.tgdd.vn/Products/Images/8788/238617/bhx/tao-koru-nhap-khau-my-1kg-4-5-trai-202303141444448495.jpg" alt="">
-				<h3>Táo mật Koru Mỹ 1kg (4 - 5 trái)</h3>
-				<p>Táo Koru là trái cây nhập khẩu Mỹ, có vỏ ngoài màu đỏ trên nền vàng, có giòn, mọng nước, có vị ngọt tự nhiên.</p>
-			</a>
-		</div>
-		<div class="col-6 col-md-3">
-			<a class="link-success" href="chitietsp.php">
-				<img class="img-fluid" src="https://cdn.tgdd.vn/Products/Images/8788/238617/bhx/tao-koru-nhap-khau-my-1kg-4-5-trai-202303141444448495.jpg" alt="">
-				<h3>Táo mật Koru Mỹ 1kg (4 - 5 trái)</h3>
-				<p>Táo Koru là trái cây nhập khẩu Mỹ, có vỏ ngoài màu đỏ trên nền vàng, có giòn, mọng nước, có vị ngọt tự nhiên.</p>
-			</a>
-		</div>
-		<div class="col-6 col-md-3">
-			<a class="link-success" href="chitietsp.php">
-				<img class="img-fluid" src="https://cdn.tgdd.vn/Products/Images/8788/238617/bhx/tao-koru-nhap-khau-my-1kg-4-5-trai-202303141444448495.jpg" alt="">
-				<h3>Táo mật Koru Mỹ 1kg (4 - 5 trái)</h3>
-				<p>Táo Koru là trái cây nhập khẩu Mỹ, có vỏ ngoài màu đỏ trên nền vàng, có giòn, mọng nước, có vị ngọt tự nhiên.</p>
-			</a>
-		</div>
-		<div class="col-6 col-md-3">
-			<a class="link-success" href="chitietsp.php">
-				<img class="img-fluid" src="https://cdn.tgdd.vn/Products/Images/8788/238617/bhx/tao-koru-nhap-khau-my-1kg-4-5-trai-202303141444448495.jpg" alt="">
-				<h3>Táo mật Koru Mỹ 1kg (4 - 5 trái)</h3>
-				<p>Táo Koru là trái cây nhập khẩu Mỹ, có vỏ ngoài màu đỏ trên nền vàng, có giòn, mọng nước, có vị ngọt tự nhiên.</p>
-			</a>
-		</div>
-	</div>
-</div>
+<?php } ?>
 
 <?php
 if (!empty($row)) {

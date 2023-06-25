@@ -6,7 +6,7 @@ include '../../../partials/db_connect.php';
 ?>
 
 <?php 
-	if ( (is_administrator() && (basename($_SERVER['PHP_SELF']) != 'logout.php')) || ! (empty($loggedin)) ) {
+	if ( !(empty($_SESSION['user'])) && $_SESSION['role'] == 'admin' ) {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			if (!empty($_POST['ten_trang_thai'])) {
 				include '../../../partials/db_connect.php';

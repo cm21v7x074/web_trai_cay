@@ -6,7 +6,7 @@ include '../../../partials/db_connect.php';
 ?>
 
 <?php 
-	if ( (is_administrator() && (basename($_SERVER['PHP_SELF']) != 'logout.php')) || ! (empty($loggedin)) ) {
+	if ( !(empty($_SESSION['user'])) && $_SESSION['role'] == 'admin' ) {
 		if (isset($_GET['id']) && is_numeric($_GET['id']) && ($_GET['id'] > 0)) {
             $query = "SELECT * FROM loai_san_pham WHERE id={$_GET['id']}";
             try {

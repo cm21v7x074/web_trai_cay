@@ -6,15 +6,24 @@ include '../../../partials/db_connect.php';
 ?>
 
 <?php 
-	if ( (is_administrator() && (basename($_SERVER['PHP_SELF']) != 'logout.php')) || ! (empty($loggedin)) ) {
+	if ( !(empty($_SESSION['user'])) && $_SESSION['role'] == 'admin' ) {
+		$nguon_goc = 'SELECT * FROM nguon_goc ORDER BY id ASC';
+		$loai_san_pham = 'SELECT * FROM loai_san_pham ORDER BY id ASC';
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			if (!empty($_POST['ten'])) {
+			if (!empty($_POST['ten_san_pham']) && !empty($_POST['can_nang']) && !empty($_POST['gia_tien']) && !empty($_POST['id_nguon_goc']) && !empty($_POST['id_loai_san_pham'])) {
 				include '../../../partials/db_connect.php';
-				$query = 'INSERT INTO san_pham (ten) VALUE (?)';
+				$query = 'INSERT INTO san_pham (ten_san_pham, can_nang, gia_tien, id_nguon_goc, id_loai_san_pham, hinh_anh, gia_khuyen_mai, noi_dung) VALUE (?,?,?,?,?,?,?,?)';
 				try {
 					$statement = $pdo->prepare($query);
 					$statement->execute([
-						$_POST['ten']
+						$_POST['ten_san_pham'],
+						$_POST['can_nang'],
+						$_POST['gia_tien'],
+						$_POST['id_nguon_goc'],
+						$_POST['id_loai_san_pham'],
+						$_POST['hinh_anh'],
+						$_POST['gia_khuyen_mai'],
+						$_POST['noi_dung']
 					]);
 				} catch (PDOException $e) {
 					$pdo_error = $e->getMessage();
@@ -45,25 +54,62 @@ include '../../../partials/db_connect.php';
 					<label class="form-label">Tên Sản Phẩm</label>
 				</div>
 				<div class="col-12 col-md-10">
-					<input type="text" name="ten_san_pham" class="form-control mb-3">
+					<input required type="text" name="ten_san_pham" class="form-control mb-3">
 				</div>
 				<div class="col-12 col-md-2">
-					<label class="form-label">Tên Sản Phẩm</label>
+					<label class="form-label">Cân nặng</label>
 				</div>
 				<div class="col-12 col-md-10">
-					<input type="text" name="ten" class="form-control mb-3">
+					<input required type="text" name="can_nang" class="form-control mb-3">
 				</div>
 				<div class="col-12 col-md-2">
-					<label class="form-label">Tên Sản Phẩm</label>
+					<label class="form-label">Giá tiền</label>
 				</div>
 				<div class="col-12 col-md-10">
-					<input type="text" name="ten" class="form-control mb-3">
+					<input required type="text" name="gia_tien" class="form-control mb-3">
 				</div>
 				<div class="col-12 col-md-2">
-					<label class="form-label">Tên Sản Phẩm</label>
+					<label class="form-label">Giá khuyến mãi</label>
 				</div>
 				<div class="col-12 col-md-10">
-					<input type="text" name="ten" class="form-control mb-3">
+					<input type="text" name="gia_khuyen_mai" class="form-control mb-3">
+				</div>
+				<div class="col-12 col-md-2">
+					<label class="form-label">Nguồn gốc</label>
+				</div>
+				<div class="col-12 col-md-10">
+					<select required name="id_nguon_goc" class="form-select mb-3" aria-label="Default select example">
+						<option value="">Chọn nguồn gốc</option>
+						<?php foreach ($pdo->query($nguon_goc) as $row) { ?>
+							<option value="<?php echo $row['id'] ?>"><?php echo $row['xuat_xu'] ?></option>
+						<?php } ?>
+					</select>
+				</div>
+				<div class="col-12 col-md-2">
+					<label class="form-label">Loại sản phẩm</label>
+				</div>
+				<div class="col-12 col-md-10">
+					<select required name="id_loai_san_pham" class="form-select mb-3" aria-label="Default select example">
+						<option value="">Chọn loại sản phẩm</option>
+						<?php foreach ($pdo->query($loai_san_pham) as $row) { ?>
+							<option value="<?php echo $row['id'] ?>"><?php echo $row['ten'] ?></option>
+						<?php } ?>
+					</select>
+				</div>
+				<div class="col-12 col-md-2">
+					<label class="form-label">Hình ảnh</label>
+				</div>
+				<div class="col-12 col-md-10">
+					<input required type="text" name="hinh_anh" class="form-control mb-3">
+				</div>
+				<div class="col-12 col-md-2">
+					<label class="form-label">Nội dung</label>
+				</div>
+				<div class="col-12 col-md-10">
+					<textarea class="form-control mb-3" name="noi_dung" id="" cols="30" rows="10"></textarea>
+				</div>
+				<div class="col-12 col-md-2"></div>
+				<div class="col-12 col-md-10">
 					<button type="submit" class="btn btn-primary">Thêm</button>
 				</div>
 			</div>

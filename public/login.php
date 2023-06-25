@@ -2,16 +2,24 @@
 
 define('TITLE', 'Login');
 include '../partials/header.php';
+include '../partials/db_connect.php';
 
 $loggedin = false;
 $error_message = false;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
 	if (!empty($_POST['email']) && !empty($_POST['password'])) {
-
-		if ((strtolower($_POST['email']) == 'me@example.com') && ($_POST['password'] == 'testpass')) {
-			$_SESSION['user'] = 'me';
+		$query = "SELECT * FROM nguoi_dung WHERE email='". $_POST['email'] ."' AND mat_khau='".$_POST['password']."'";
+		try {
+			$statement = $pdo->query($query);
+			$row = $statement->fetch();
+		} catch (PDOException $e) {
+			$pdo_error = $e->getMessage();
+		}
+		if (!empty($row)) {
+			$_SESSION['id'] = $row['id'];
+			$_SESSION['user'] = $row['email'];
+			$_SESSION['role'] = $row['role'];
 			$loggedin = true;
 		} else {
 			$error_message = 'Địa chỉ email và mật khẩu không khớp!';
@@ -21,13 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 }
 
-if ( (is_administrator() && (basename($_SERVER['PHP_SELF']) != 'logout.php'))
-		|| ! (empty($loggedin)) ) { ?>
+if ( !(empty($_SESSION['user'])) ) { ?>
 <div class="my-3 text-center">
 	<p>Bạn đã đăng nhập!</p>
 	<div>
 		<a class="btn btn-primary" href="index.php">Trang chủ</a>
-		<a class="btn btn-success" href="admin/index.php">Quản lý</a>
+		<a class="btn btn-success" href="taikhoan.php">Tài khoản</a>
+		<?php if ($_SESSION['role'] == 'admin') { ?>
+			<a class="btn btn-warning" href="admin/index.php">Quản lý</a>
+		<?php } ?>
 	</div>
 </div>
 <?php } else {

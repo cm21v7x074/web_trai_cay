@@ -1,11 +1,6 @@
 <!-- END CHANGEABLE CONTENT. -->
 <?php
-
-if ( (is_administrator() && (basename($_SERVER['PHP_SELF']) != 'logout.php'))
-		|| ! (empty($loggedin)) ) {
-	// echo '<hr><p><a href="add_quote.php">Thêm Trích dẫn</a> <->
-	// <a href="view_quotes.php">Xem tất cả Trích dẫn</a> <->
-	// <a href="logout.php">Đăng xuất</a></p>';
+	if ( !(empty($_SESSION['user'])) ) {
 ?>
 	<div class="text-center mt-5">
 		<a class="btn btn-primary" href="logout.php">Đăng xuất</a>

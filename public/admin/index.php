@@ -5,8 +5,7 @@ include '../../partials/db_connect.php';
 
 ?>
 
-<?php if ( (is_administrator() && (basename($_SERVER['PHP_SELF']) != 'logout.php'))
-		|| ! (empty($loggedin)) ) { ?>
+<?php if ( !(empty($_SESSION['user'])) && $_SESSION['role'] == 'admin' ) { ?>
 
 <div class="row my-3">
 	<div class="col-12">
