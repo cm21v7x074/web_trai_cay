@@ -33,8 +33,8 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 							Người dùng
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">Danh sách</a></li>
-							<li><a class="dropdown-item" href="#">Thêm mới</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/nguoi_dung/index.php">Danh sách</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/nguoi_dung/them.php">Thêm mới</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -51,8 +51,8 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 							Sản phẩm
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/san_pham/index.php">Danh sách</a></li>
-							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/san_pham/them.php">Thêm mới</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/san_pham/index.php">Danh sách</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/san_pham/them.php">Thêm mới</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -60,8 +60,8 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 							Loại sản phẩm
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/loai_san_pham/index.php">Danh sách</a></li>
-							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/loai_san_pham/them.php">Thêm mới</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/loai_san_pham/index.php">Danh sách</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/loai_san_pham/them.php">Thêm mới</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -69,8 +69,8 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 							Nguồn gốc
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/nguon_goc/index.php">Danh sách</a></li>
-							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/nguon_goc/them.php">Thêm mới</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/nguon_goc/index.php">Danh sách</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/nguon_goc/them.php">Thêm mới</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -78,8 +78,17 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 							Trạng thái
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/trang_thai/index.php">Danh sách</a></li>
-							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/admin/trang_thai/them.php">Thêm mới</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/trang_thai/index.php">Danh sách</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/trang_thai/them.php">Thêm mới</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Tin tức
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/tin_tuc/index.php">Danh sách</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/tin_tuc/them.php">Thêm mới</a></li>
 						</ul>
 					</li>
 				</ul>

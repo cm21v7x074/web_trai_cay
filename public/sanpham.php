@@ -18,7 +18,7 @@ $loai_san_pham = 'SELECT * FROM loai_san_pham ORDER BY id ASC';
 					<a class="link-success" href="chitietsp.php?id=<?php echo $row['id']; ?>">
 						<img class="img-fluid" src="<?php echo $row['hinh_anh']; ?>" alt="">
 						<h3 class="my-2"><?php echo $row['ten_san_pham']; ?></h3>
-						<p><?php echo $row['gia_tien']; ?></p>
+						<p><?php echo number_format($row['gia_tien'], 0, '', ','); ?> VNĐ</p>
 					</a>
 				</div>
 			<?php } ?>

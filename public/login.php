@@ -42,7 +42,7 @@ if ( !(empty($_SESSION['user'])) ) { ?>
 </div>
 <?php } else {
 	echo '<h1 class="text-center py-3">Đăng nhập</h1>
-	<form action="login.php" method="post">
+	<form class="mb-5" action="login.php" method="post">
 		<div class="mb-3">
 			<label for="exampleInputEmail1" class="form-label">Địa chỉ Email</label>
 			<input required type="email" name="email" class="form-control" id="exampleInputEmail1">

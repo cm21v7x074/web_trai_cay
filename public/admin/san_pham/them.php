@@ -7,10 +7,12 @@ include '../../../partials/db_connect.php';
 
 <?php 
 	if ( !(empty($_SESSION['user'])) && $_SESSION['role'] == 'admin' ) {
+		$gia_khuyen_mai = 0;
 		$nguon_goc = 'SELECT * FROM nguon_goc ORDER BY id ASC';
 		$loai_san_pham = 'SELECT * FROM loai_san_pham ORDER BY id ASC';
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			if (!empty($_POST['ten_san_pham']) && !empty($_POST['can_nang']) && !empty($_POST['gia_tien']) && !empty($_POST['id_nguon_goc']) && !empty($_POST['id_loai_san_pham'])) {
+				if ( !empty($_POST['gia_khuyen_mai']) ) $gia_khuyen_mai = $_POST['gia_khuyen_mai'];
 				include '../../../partials/db_connect.php';
 				$query = 'INSERT INTO san_pham (ten_san_pham, can_nang, gia_tien, id_nguon_goc, id_loai_san_pham, hinh_anh, gia_khuyen_mai, noi_dung) VALUE (?,?,?,?,?,?,?,?)';
 				try {
@@ -22,7 +24,7 @@ include '../../../partials/db_connect.php';
 						$_POST['id_nguon_goc'],
 						$_POST['id_loai_san_pham'],
 						$_POST['hinh_anh'],
-						$_POST['gia_khuyen_mai'],
+						$gia_khuyen_mai,
 						$_POST['noi_dung']
 					]);
 				} catch (PDOException $e) {

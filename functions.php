@@ -7,9 +7,9 @@ function is_administrator($user = 'me') {
 function getBaseUrl()
 {
 	if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
-		$url = "https://";   
+		$url = "https://";
     else  
-		$url = "http://";   
+		$url = "http://";
     // Append the host(domain name, ip) to the URL.   
     $url .= $_SERVER['HTTP_HOST'];
 	return $url;

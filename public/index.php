@@ -3,49 +3,56 @@ include '../partials/header.php';
 
 include '../partials/db_connect.php';
 
-// if (isset($_GET['random'])) {
-// 	$query = 'SELECT id, quote, source, favorite FROM quotes ORDER BY RAND() DESC LIMIT 1';
-// } elseif (isset($_GET['favorite'])) {
-// 	$query = 'SELECT id, quote, source, favorite FROM quotes WHERE favorite=1 ORDER BY RAND() DESC LIMIT 1';
-// } else {
-// 	$query = 'SELECT id, quote, source, favorite FROM quotes ORDER BY date_entered DESC LIMIT 1';
-// }
-
-// try {
-// 	$sth = $pdo->query($query);
-// 	$row = $sth->fetch();
-// } catch (PDOException $e) {
-// 	$pdo_error = $e->getMessage();
-// }
-
+$loai_san_pham = 'SELECT * FROM loai_san_pham ORDER BY id ASC';
 ?>
+
+<div id="carouselExample" class="carousel slide">
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img src="img/banner-web.png" class="d-block w-100" alt="img/banner-web.png">
+		</div>
+		<div class="carousel-item">
+			<img src="img/website-2.png" class="d-block w-100" alt="img/website-2.png">
+		</div>
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+	<span class="visually-hidden">Next</span>
+	</button>
+</div>
+
+<?php 
+	foreach ($pdo->query($loai_san_pham) as $data) {
+		$sanpham = 'SELECT * FROM san_pham WHERE id_loai_san_pham='. $data['id'] .' ORDER BY id ASC';
+?>
+	<div class="my-3">
+		<h2 class="py-2"><?php echo $data['ten']; ?></h2>
+		<div class="row">
+			<?php foreach ($pdo->query($sanpham) as $row) { ?>
+				<div class="col-6 col-md-3">
+					<a class="link-success" href="chitietsp.php?id=<?php echo $row['id']; ?>">
+						<img class="img-fluid" src="<?php echo $row['hinh_anh']; ?>" alt="">
+						<h3 class="my-2"><?php echo $row['ten_san_pham']; ?></h3>
+						<p><?php echo number_format($row['gia_tien'], 0, '', ','); ?> VNĐ</p>
+					</a>
+				</div>
+			<?php } ?>
+		</div>
+	</div>
+<?php } ?>
 
 <?php
 if (!empty($row)) {
 
-	// $htmlspecialchars = 'htmlspecialchars';
-	// echo "<div><blockquote>{$htmlspecialchars($row['quote'])}</blockquote>- 
-	// 		{$htmlspecialchars($row['source'])}<br>";
-
-	// if ($row['favorite'] == 1) {
-	// 	echo ' <strong>Yêu thích!</strong>';
-	// }
-
-	// echo '</div>';
-
-	// if (is_administrator()) {
-	// 	echo "<p><b>Quản trị Trích dẫn:</b> <a href=\"edit_quote.php?id={$row['id']}\">Sửa</a> <->
-	// 		<a href=\"delete_quote.php?id={$row['id']}\">Xóa</a>
-	// 		</p><br>";
-	// }
+	
 } else if (isset($pdo_error)) {
 	$error_message = 'Không thể lấy dữ liệu';
 	$reason = $pdo_error;
 	include '../partials/show_error.php';
 }
-
-// echo '<p><a href="index.php">Mới nhất</a> <-> ' .
-// 	'<a href="index.php?random=true">Ngẫu nhiên</a> <-> ' .
-// 	'<a href="index.php?favorite=true">Yêu thích</a></p>';
 
 include '../partials/footer.php';
