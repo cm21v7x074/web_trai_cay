@@ -8,7 +8,7 @@ include '../../../partials/db_connect.php';
 <?php 
 	if ( !(empty($_SESSION['user'])) && $_SESSION['role'] == 'admin' ) {
 		if (isset($_GET['id']) && is_numeric($_GET['id']) && ($_GET['id'] > 0)) {
-            $query = "SELECT * FROM trang_thai WHERE id={$_GET['id']}";
+            $query = "SELECT * FROM tin_tuc WHERE id={$_GET['id']}";
             try {
                 $statement = $pdo->query($query);
                 $row = $statement->fetch();
@@ -21,16 +21,16 @@ include '../../../partials/db_connect.php';
 
 <div class="row my-3">
     <div class="col-12">
-		<h2>Xóa Trạng Thái</h2>
+		<h2>Xóa Tin Tức</h2>
     </div>
 	<div class="col-12">
 		<form method="post" action="xoa.php" class="mt-3">
 			<div class="row">
 				<div class="col-12 col-md-2">
-					<label class="form-label">Bạn có muốn xóa trạng thái này?</label>
+					<label class="form-label">Bạn có muốn xóa Tin Tức này?</label>
 				</div>
 				<div class="col-12 col-md-10">
-					<input type="text" disabled="disabled" name="ten_trang_thai" value="<?php echo htmlspecialchars($row['ten_trang_thai']); ?>" class="form-control mb-3">
+					<input type="text" disabled="disabled" name="tieu_de" value="<?php echo htmlspecialchars($row['tieu_de']); ?>" class="form-control mb-3">
 					<button type="submit" class="btn btn-primary">Xóa</button>
 				</div>
 			</div>
@@ -39,12 +39,12 @@ include '../../../partials/db_connect.php';
 	</div>
 </div>
             <?php } else {
-                $error_message = 'Không thể lấy được trạng thái';
+                $error_message = 'Không thể lấy được Tin Tức';
                 $reason = $pdo_error ?? 'Không rõ nguyễn nhân';
                 include '../../../partials/show_error.php';
             }
         } else if (isset($_POST['id']) && is_numeric($_POST['id']) && ($_POST['id'] > 0)) {
-            $query = "DELETE FROM trang_thai WHERE id={$_POST['id']}";
+            $query = "DELETE FROM tin_tuc WHERE id={$_POST['id']}";
 
             try {
                 $statement = $pdo->query($query);
@@ -53,9 +53,9 @@ include '../../../partials/db_connect.php';
             }
         
             if ($statement && $statement->rowCount() == 1){
-                echo '<h4 class="text-success p-3">Trạng thái này đã được xóa!</h4><div><a class="btn btn-primary" href="index.php">Danh sách</a></div>';
+                echo '<h4 class="text-success p-3">Tin Tức này đã được xóa!</h4><div><a class="btn btn-primary" href="index.php">Danh sách</a></div>';
             } else {
-                $error_message = 'Không thể xóa trạng thái';
+                $error_message = 'Không thể xóa Tin Tức';
                 $reason = $pdo_error ?? 'Không rõ nguyễn nhân';
                 include '../../../partials/show_error.php';
             }

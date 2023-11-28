@@ -91,6 +91,15 @@ include __DIR__ . '/../functions.php'; ?><!doctype html>
 							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/tin_tuc/them.php">Thêm mới</a></li>
 						</ul>
 					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Danh mục
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/danh_muc/index.php">Danh sách</a></li>
+							<li><a class="dropdown-item" href="<?php echo getBaseUrl(); ?>/public/admin/danh_muc/them.php">Thêm mới</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>

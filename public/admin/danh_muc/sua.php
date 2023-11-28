@@ -8,7 +8,7 @@ include '../../../partials/db_connect.php';
 <?php 
 	if ( !(empty($_SESSION['user'])) && $_SESSION['role'] == 'admin' ) {
 		if (isset($_GET['id']) && is_numeric($_GET['id']) && ($_GET['id'] > 0)) {
-            $query = "SELECT * FROM tin_tuc WHERE id={$_GET['id']}";
+            $query = "SELECT * FROM danh_muc WHERE id={$_GET['id']}";
             try {
                 $statement = $pdo->query($query);
                 $row = $statement->fetch();
@@ -21,16 +21,16 @@ include '../../../partials/db_connect.php';
 
 <div class="row my-3">
     <div class="col-12">
-		<h2>Sửa Tin Tức</h2>
+		<h2>Sửa Danh Mục</h2>
     </div>
 	<div class="col-12">
 		<form method="post" action="sua.php" class="mt-3">
 			<div class="row">
 				<div class="col-12 col-md-2">
-					<label class="form-label">Sửa Tin Tức</label>
+					<label class="form-label">Sửa Danh Mục</label>
 				</div>
 				<div class="col-12 col-md-10">
-					<input type="text" name="tieu_de" value="<?php echo htmlspecialchars($row['tieu_de']); ?>" class="form-control mb-3">
+					<input type="text" name="ten_danh_muc" value="<?php echo htmlspecialchars($row['ten_danh_muc']); ?>" class="form-control mb-3">
 					<button type="submit" class="btn btn-primary">Sửa</button>
 				</div>
 			</div>
@@ -39,27 +39,27 @@ include '../../../partials/db_connect.php';
 	</div>
 </div>
             <?php } else {
-                $error_message = 'Không thể lấy được Tin Tức';
+                $error_message = 'Không thể lấy được Danh Mục';
                 $reason = $pdo_error ?? 'Không rõ nguyễn nhân';
                 include '../../../partials/show_error.php';
             }
         } else if (isset($_POST['id']) && is_numeric($_POST['id']) && ($_POST['id'] > 0)) {
-            if (!empty($_POST['tieu_de'])) {
-                $query = 'UPDATE tin_tuc SET tieu_de=? WHERE id=?';
+            if (!empty($_POST['ten_danh_muc'])) {
+                $query = 'UPDATE danh_muc SET ten_danh_muc=? WHERE id=?';
                 try {
                     $statement = $pdo->prepare($query);
                     $statement->execute([
-                        $_POST['tieu_de'],
+                        $_POST['ten_danh_muc'],
                         $_POST['id']
                     ]);
-                    echo '<h4 class="text-success p-3">Tin Tức này đã được cập nhật!</h4><div><a class="btn btn-primary" href="index.php">Danh sách</a></div>';
+                    echo '<h4 class="text-success p-3">Danh Mục này đã được cập nhật!</h4><div><a class="btn btn-primary" href="index.php">Danh sách</a></div>';
                 } catch (PDOException $e) {
-                    $error_message = 'Không thể cập nhật Tin Tức này';
+                    $error_message = 'Không thể cập nhật Danh Mục này';
                     $reason = $e->getMessage();
                     include '../../../partials/show_error.php';
                 }
             } else {
-                $error_message = 'Chưa nhập đủ Tin Tức';
+                $error_message = 'Chưa nhập đủ Danh Mục';
                 include '../../../partials/show_error.php';
             }
         }

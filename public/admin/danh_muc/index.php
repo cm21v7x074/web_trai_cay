@@ -7,7 +7,7 @@ include '../../../partials/db_connect.php';
 
 <?php
     if ( !(empty($_SESSION['user'])) && $_SESSION['role'] == 'admin' ) {
-        $query = 'SELECT * FROM tin_tuc ORDER BY id ASC';
+        $query = 'SELECT * FROM danh_muc ORDER BY id ASC';
 ?>
 
 <div class="row my-3">
@@ -19,7 +19,7 @@ include '../../../partials/db_connect.php';
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Tiêu Đề</th>
+                    <th scope="col">Tên Danh Mục</th>
                     <th scope="col">Hành Động</th>
                 </tr>
             </thead>
@@ -27,7 +27,7 @@ include '../../../partials/db_connect.php';
                 <?php foreach ($pdo->query($query) as $row) { ?>
                 <tr>
                     <th scope="row"><?php echo $row['id']; ?></th>
-                    <td><?php echo $row['tieu_de']; ?></td>
+                    <td><?php echo $row['ten_danh_muc']; ?></td>
                     <td>
                         <a class="btn btn-primary" href='sua.php?id=<?php echo $row["id"];?>'>Sửa</a>
                         <a class="btn btn-danger" href='xoa.php?id=<?php echo $row["id"];?>'>Xóa</a>
